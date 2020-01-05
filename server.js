@@ -10,6 +10,9 @@ app.use("/categories",categories)
 const attribute = require("./routes/attributes")
 app.use("/attributes",attribute)
 
+const product = require("./routes/products")
+app.use("/products",product)
+
 app.listen(5000, () => {
     console.log('5000 listen')
 })
