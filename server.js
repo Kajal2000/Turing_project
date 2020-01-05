@@ -16,8 +16,8 @@ app.use("/products",product)
 const shipping = require("./routes/shipping")
 app.use("/shipping_get",shipping)
 
-// const tax1 = require("./routes/tax")
-// app.use("tax",tax1)
+const tax1 = require("./routes/tax")
+app.use("/tax",tax1)
 
 app.listen(5001, () => {
     console.log('5001 listen')

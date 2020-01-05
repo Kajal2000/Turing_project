@@ -1,3 +1,4 @@
+
 const knex = require('../connection_tbl');
 
 var selectData1  = ()=>{
