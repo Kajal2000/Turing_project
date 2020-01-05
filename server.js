@@ -7,7 +7,8 @@ app.use("/deparments",deparments)
 const categories = require("./routes/categories")
 app.use("/categories",categories)
 
-
+const attribute = require("./routes/attributes")
+app.use("/attributes",attribute)
 
 app.listen(5000, () => {
     console.log('5000 listen')
