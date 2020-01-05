@@ -13,6 +13,12 @@ app.use("/attributes",attribute)
 const product = require("./routes/products")
 app.use("/products",product)
 
-app.listen(5000, () => {
-    console.log('5000 listen')
+const shipping = require("./routes/shipping")
+app.use("/shipping_get",shipping)
+
+// const tax1 = require("./routes/tax")
+// app.use("tax",tax1)
+
+app.listen(5001, () => {
+    console.log('5001 listen')
 })
