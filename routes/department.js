@@ -2,6 +2,7 @@ const express = require('express');
 const departments = express.Router();
 const departmentDb  = require("../model/departmentDB")
 
+// all data get
 departments.get('/department', (req,res) => {
     var data = departmentDb.selectData()
     data.then((Response)=>{

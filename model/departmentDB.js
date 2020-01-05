@@ -1,7 +1,7 @@
 const knex = require('../connection_tbl');
 
 var selectData  = ()=>{
-     return knex.select('*').from("department")
+    return knex.select('*').from("department")
 }
 
 var selectby_id  = (id)=>{
