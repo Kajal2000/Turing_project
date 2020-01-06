@@ -10,13 +10,6 @@ var select_product_data = (name_search) =>{
     }
 )}
 
-
-// var selectproduct_id  = (product_ID)=>{
-//     return knex.select("*")
-//     .from('product')
-//     .where('product.product_id', product_ID)
-// }
-
 var select_category_id = (category_id) =>{
     return knex("product")
     .join("product_category","product.product_id", "=" ,"product_category.product_id")
