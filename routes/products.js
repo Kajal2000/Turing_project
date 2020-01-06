@@ -9,14 +9,6 @@ product.get("/get_product",(req,res)=>{
    })
 })
 
-// product.get("/products_search/:name_search",(req,res)=>{
-//     let name_search = res.params.name_search
-//     var data = productsDB.selectby_id(name_search)
-//     data.then((Response)=>{
-//         res.json(Response)
-//     })
-// })
-
 product.get('/product/:product_id', (req,res) => {
     var product_ID = req.params.product_id
     var data = productDB.selectproduct_id(product_ID)
@@ -70,6 +62,17 @@ product.get("/products_l/:product_id",(req,res) =>{
        console.log(err)
        res.send(err)
    })
+});
+
+product.get('/products/:search_value', (req,res) => {
+    var search_value = req.params.search_value
+    var data = productsDB.select_products_search(search_value)
+    data.then((Response)=>{
+       res.json(Response)
+    }).catch((err)=>{
+       console.log(err)
+       res.send(err)
+    })
 });
 
 module.exports = product;

@@ -44,4 +44,11 @@ var select_pro_id_l = (product_ID)=>{
     .select("department.department_id","department.name as name", "category.category_id","category.name as name_1")
     .where("product_id",product_ID)
 }
-module.exports = {select_product_data,selectData,select_category_id,select_department_id,select_pro_id,select_pro_id_l}
+
+var select_products_search = (search_value) => {
+    return knex.select('*')
+    .from('product')
+    .where('product_id','like',  '%' +search_value+ '%')
+}
+
+module.exports = {select_product_data,selectData,select_category_id,select_department_id,select_pro_id,select_pro_id_l, select_products_search}
