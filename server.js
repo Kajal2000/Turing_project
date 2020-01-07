@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 app.use(express.json());
+
 // app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(bodyParser.json());
 // app.use(bodyParser.raw());
@@ -28,8 +29,11 @@ app.use("/shopping_cart",shoppingcart)
 const products = require('./routes/products')
 app.use("/product",products)
 
-app.listen(5000, () => {
-    console.log('5000 listen')
+const customerData = require("./routes/customer")
+app.use("/customers",customerData)
+
+app.listen(4000, () => {
+    console.log('4000 listen')
 })
 
 
