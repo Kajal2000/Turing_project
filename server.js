@@ -1,5 +1,11 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+app.use(express.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.raw());
+// app.use(express.urlencoded({ extended: true }));
 
 const deparments = require("./routes/department")
 app.use("/deparments",deparments)
@@ -20,10 +26,10 @@ const shoppingcart = require("./routes/shoppingcard")
 app.use("/shopping_cart",shoppingcart)
 
 const products = require('./routes/products')
-app.use("/products",products)
+app.use("/product",products)
 
-app.listen(5001, () => {
-    console.log('5001 listen')
+app.listen(5000, () => {
+    console.log('5000 listen')
 })
 
 

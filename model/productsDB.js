@@ -44,4 +44,23 @@ var select_products_search = (search_value) => {
     .where('product_id','like',  '%' +search_value+ '%')
 }
 
-module.exports = {select_product_data,selectData,select_category_id,select_department_id,select_pro_id,select_pro_id_l, select_products_search}
+var selectDatareviews  = () => {
+    return knex.select('*').from("review")
+}
+
+var insertdata_review = (reviews) => {
+    // console.log(reviews, "Kajal")
+    return knex('review').insert(reviews)
+}
+
+module.exports = {
+    select_product_data,
+    selectData,
+    select_category_id,
+    select_department_id,
+    select_pro_id,
+    select_pro_id_l,
+    select_products_search,
+    selectDatareviews,
+    insertdata_review,
+};

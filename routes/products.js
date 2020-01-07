@@ -75,4 +75,29 @@ product.get('/products/:search_value', (req,res) => {
     })
 });
 
+product.get("/reviews_get",(req,res)=>{
+    var data = productDB.selectDatareviews()
+    data.then((data)=>{
+       res.json(data)
+   })
+})
+
+product.post("/products_reviews",(req,res) => {
+    // const data = JSON.parse(Object.keys(req.body)[0])
+    let reviews = {
+       "review_id" : req.body.review_id,
+       "customer_id": req.body.customer_id,
+       "product_id" : req.body.product_id,
+       "review": req.body.review,
+       "rating": req.body.rating,
+       "created_on": new Date()
+    }
+    productDB.insertdata_review(reviews)
+    .then((data)=>{
+       return res.json(data)
+    }).catch((err)=>{
+       console.log(err);
+    })
+});
+
 module.exports = product;
