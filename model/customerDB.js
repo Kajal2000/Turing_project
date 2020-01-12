@@ -28,11 +28,14 @@ var login = (password) => {
 }
 
 // 6)
-// var adress_data = (updata,customer_id) => {
-//     return knex('customer').update(updata)
-//     .where("customer_id",customer_id)
-// }
+var adress_data = (updata,customer_id) => {
+    return knex('customer').update(updata)
+    .where("customer.customer_id",customer_id)
+}
 
+var creditCard_data = (updata,customer_id) => {
+    return knex('customer').update(updata)
+    .where("customer.customer_id",customer_id)
+}
 
-
-module.exports = {insertdata_customer,selectby_customer_id,login_email,login}
+module.exports = {insertdata_customer,selectby_customer_id,login_email,login,adress_data,creditCard_data}

@@ -79,26 +79,42 @@ customer.post("/login",(req,res) => {
     })
 });
     
-// customer.put('/customers_address/:customer_id',(req,res)=>{
-//     let customer_id = req.params.customer_id
-//     var arrayData = req.headers.cookie.split("=")
-//     var lastTokeStore = arrayData[arrayData.length - 2].slice(11,590)
-//     // let myToken = jwt.sign(lastTokeStore,"kajal",(err,data)=>{
-//     jwt.verify(lastTokeStore, "kajal",(err,data)=>{
-//         // console.log(data)
-//         for(var i = 0; i<data['customer'].length; i++){
-//             let customer_id_store = data['customer'][i]['customer_id']
-//             console.log(customer_id_store)
-//         }
-//         let updata = ({
-//             address_2 : req.body.address_2,
-//             address_1 : req.body.address_1
-//         })
-//         customerDB.adress_data(updata,customer_id)
-//         .then(()=>{
-//             res.json(updata)
-//         })
-//     })
-// });
+customer.put('/customers_address/:customer_id',(req,res)=>{
+    let customer_id = req.params.customer_id
+    var alltoken = req.headers.cookie
+    var token = alltoken.split('=undefined')
+    token = (token[token.length-2]).slice(2,600)
+    jwt.verify(token, 'kajal', (err,data) => {
+        for(let i = 0; i < data['costomer'].length; i++)
+        var password = data['costomer'][i]['password']
+        let updata = ({
+            address_2 : req.body.address_2,
+            address_1 : req.body.address_1
+        })
+        customerDB.adress_data(updata,customer_id)
+        .then(()=>{
+            res.send(updata)
+        })
+    })
+});
+
+customer.put('/customers_creditCard/:customer_id',(req,res)=>{
+    let customer_id = req.params.customer_id
+    var alltoken = req.headers.cookie
+    var token = alltoken.split('=undefined')
+    token = (token[token.length-2]).slice(2,600)
+    jwt.verify(token, 'kajal', (err,data) => {
+        for(let i = 0; i < data['costomer'].length; i++)
+        var password = data['costomer'][i]['password']
+        let updata = ({
+            credit_card : req.body.credit_card,
+        })
+        customerDB.creditCard_data(updata,customer_id)
+        .then(()=>{
+            res.send(updata)
+        })
+    })
+});
+
 
 module.exports = customer;
