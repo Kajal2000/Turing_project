@@ -2,6 +2,7 @@ const express = require('express');
 const customer = express.Router();
 const customerDB  = require("../model/customerDB")
 
+var jwt = require("jsonwebtoken")
 // 2)
 customer.get('/customers_get/:customer_id',(req,res) => {
     let customer_ID = req.params.customer_id
@@ -51,5 +52,53 @@ customer.put('/customers_update/:customer_id',(req,res) => {
        console.log(err);
     })
 })
+
+// 4)
+customer.post("/login",(req,res) => {
+    var pass = req.body.password;
+    var eml = req.body.email;
+    customerDB.login_email(eml)
+    .then((logindata)=>{
+        // console.log(logindata)
+        if (logindata.length == 0){
+            res.send("wrong h email")
+        }else{customerDB.login(pass)
+            .then((logindata) =>{
+            if (logindata.length == 0){
+                res.send("Wrong h password")
+            }else{
+                let newToken = jwt.sign({ "costomer" : logindata }, "kajal")
+                    // console.log(newToken)
+                    res.cookie(newToken)
+                    res.send('loing successsful')
+                }
+            })
+        }
+    }).catch((err)=>{
+        console.log(err); 
+    })
+});
+    
+// customer.put('/customers_address/:customer_id',(req,res)=>{
+//     let customer_id = req.params.customer_id
+//     var arrayData = req.headers.cookie.split("=")
+//     var lastTokeStore = arrayData[arrayData.length - 2].slice(11,590)
+//     // let myToken = jwt.sign(lastTokeStore,"kajal",(err,data)=>{
+//     jwt.verify(lastTokeStore, "kajal",(err,data)=>{
+//         // console.log(data)
+//         for(var i = 0; i<data['customer'].length; i++){
+//             let customer_id_store = data['customer'][i]['customer_id']
+//             console.log(customer_id_store)
+//         }
+//         let updata = ({
+//             address_2 : req.body.address_2,
+//             address_1 : req.body.address_1
+//         })
+//         customerDB.adress_data(updata,customer_id)
+//         .then(()=>{
+//             res.json(updata)
+//         })
+//     })
+// });
 
 module.exports = customer;

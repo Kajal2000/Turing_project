@@ -50,11 +50,54 @@ var shopping_remove_product = (item_id)=>{
     .where("shopping_cart.item_id",item_id)
     .del()
 }
+// 4)
+var shopping_card_Update = (item_ID)=>{
+    return knex("shopping_cart")
+        .join("product","shopping_cart.product_id", "=", "product.product_id")
+        .select("shopping_cart.product_id","attributes","item_id","quantity","product.name","price")
+        .where("shopping_cart.item_id",item_ID)
+}    
+// 8)
+var shoppingCar_id = (item_id)=>{
+    return knex('shopping_cart').where("item_id",item_id)
+}
+var inser_data = (shoppingDataStore)=>{
+    return knex("saveForLater")
+    .insert(shoppingDataStore)
+}
+
+var delete_data = (item_id)=>{
+    return knex("shopping_cart")
+    .where("shopping_cart.item_id",item_id)
+    .del()
+};
+
+// 6)
+var moveToCart_item_id = (item_id) => {
+    return knex('saveForLater').select("item_id","cart_id","product_id","attributes","quantity","buy_now")
+    .where("item_id",item_id)
+};
+
+var moveToCart = (updataData) => {
+    return knex('shopping_cart').insert(updataData)
+};
+
+var moveToCartsave = (item_id) => {
+    return knex('saveForLater').where('saveForLater.item_id',item_id).del()
+};
 
 module.exports = {selectby_id,
     shopping_remove_product,
     insertdata_shopping,
-    selectby_id_del
-    ,select_by_id_shopping,
+    selectby_id_del,
+    select_by_id_shopping,
     select_getSaved,
-    shopping_selectby_id}
+    shopping_selectby_id,
+    shopping_card_Update,
+    shoppingCar_id,
+    inser_data,
+    delete_data,
+    moveToCart_item_id,
+    moveToCart,
+    moveToCartsave
+}
