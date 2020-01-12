@@ -32,6 +32,9 @@ app.use("/product",products)
 const customerData = require("./routes/customer")
 app.use("/customers",customerData)
 
+const orderData = require("./routes/orders")
+app.use("/orders",orderData)
+
 app.listen(4444, () => {
     console.log('4444 listen')
 })
