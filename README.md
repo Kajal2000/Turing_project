@@ -17,4 +17,3 @@ MVC = Model View Controler
 3) JWT (Json Web Token)
 4) Rendom string
 5) Body parser
-6) 
